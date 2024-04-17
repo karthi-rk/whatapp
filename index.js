@@ -9,7 +9,7 @@ app.get('/', (req, res) => {
 app.post('/receive-message', (req, res) => {
     console.log("sample inside the receive message")
     console.log(req.body);
-    res.json({ "success": true });
+    res.send("huiiui");
 });
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
