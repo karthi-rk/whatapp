@@ -194,10 +194,11 @@ function getTemplateFromInteractiveMessage(req, interactive) {
     } else if (interactive.list_reply.id.includes("slot")) {
         userData[req.body.entry[0].changes[0].value.messages[0].from]['slot'] = interactive.list_reply
         return getdate(req);
-    } else if (detectDateFormat(req.body.entry[0].changes[0].value.messages[0].text.body.trim())) {
-        userData[req.body.entry[0].changes[0].value.messages[0].from]['date'] = req.body.entry[0].changes[0].value.messages[0].text.body
-        return paymentlink(req);
     }
+}
+function paymentText(req) {
+    userData[req.body.entry[0].changes[0].value.messages[0].from]['date'] = req.body.entry[0].changes[0].value.messages[0].text.body
+    return paymentlink(req);
 }
 
 // Regular expression patterns to detect date formats
@@ -259,7 +260,7 @@ function sendWhatsappMessage(req) {
             'Authorization': 'Bearer EAAPsguiCMzMBOyVbZCFGr1TO9fEbVzp1AWvLyKQAofmBjMp9g702UOtcuUZAWZBZCv683IR9T9FneBLg5vZAkZAYpq97xhvxQA9Jw68uSy9b24yVRlPqzrHryMLbasnBfZAbgGbp2nwhZBAZCZCyHjyoDZBdoryUn2e164zYBddverujO566gs8n4FeuskYWSZCZAcMHobOyXHj9bYcckcX1ww3AZD',
             'Content-Type': 'application/json'
         },
-        body: req.body.entry[0].changes[0].value.messages[0].type != "interactive" ? JSON.stringify(getinteractive_service(req)) : JSON.stringify(getTemplateFromInteractiveMessage(req, req.body.entry[0].changes[0].value.messages[0].interactive))
+        body: req.body.entry[0].changes[0].value.messages[0].type != "interactive" && !detectDateFormat(req.body.entry[0].changes[0].value.messages[0].text.body.trim()) ? JSON.stringify(getinteractive_service(req)) : req.body.entry[0].changes[0].value.messages[0].type != "interactive" ? paymentText() : JSON.stringify(getTemplateFromInteractiveMessage(req, req.body.entry[0].changes[0].value.messages[0].interactive))
 
     };
     console.log("start----")
