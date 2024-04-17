@@ -51,9 +51,10 @@ function sendWhatsappMessage() {
     });
 
 }
-app.get('*', function (req, res) {
+app.use((req, res, next) => {
+    console.log(req.path)
     console.log("route not found")
-    res.status(404).send('what???');
+
 });
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
