@@ -16,12 +16,9 @@ app.get('/receive-message', (req, res) => {
     }
 });
 app.post('/receive-message', (req, res) => {
-    if (req.query['hub.verify_token'] === "huiiui") {
-        sendWhatsappMessage();
-        res.send(req.query['hub.challenge']);
-    } else {
-        res.sendStatus(400)
-    }
+    console.log(req.body)
+    sendWhatsappMessage();
+    res.send(req.query['hub.challenge']);
 });
 function sendWhatsappMessage() {
     var request = require('request');
