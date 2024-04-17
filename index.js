@@ -17,8 +17,6 @@ app.get('/receive-message', (req, res) => {
 });
 app.post('/receive-message', (req, res) => {
     console.log(JSON.stringify(req.body.entry[0].changes))
-    console.log(req.body.messages)
-    console.log(req.body.field)
     if (req.body.entry[0].changes[0].value.messages)
         sendWhatsappMessage();
     res.send(req.query['hub.challenge']);
@@ -35,13 +33,67 @@ function sendWhatsappMessage() {
         body: JSON.stringify({
             "messaging_product": "whatsapp",
             "to": "7012823508",
-            "type": "template",
-            "template": {
-                "name": "hello_world",
-                "language": {
-                    "code": "en_US"
+            "type": "interactive",
+
+            "interactive": {
+                "type": "list",
+                "header": {
+                    "type": "text",
+                    "text": "Top Destinations"
+                },
+                "body": {
+                    "text": "Check out these popular travel destinations!"
+                },
+                "footer": {
+                    "text": "Book your trip today!"
+                },
+                "action": {
+                    "button": "View Options",
+                    "sections": [
+                        {
+                            "title": "Europe",
+                            "rows": [
+                                {
+                                    "id": "paris",
+                                    "title": "Paris, France",
+                                    "description": "Explore the City of Love with its iconic landmarks and vibrant culture."
+                                },
+                                {
+                                    "id": "london",
+                                    "title": "London, England",
+                                    "description": "Experience the rich history, modern architecture, and diverse neighborhoods of the British capital."
+                                },
+                                {
+                                    "id": "barcelona",
+                                    "title": "Barcelona, Spain",
+                                    "description": "Immerse yourself in the Mediterranean vibe, renowned architecture, and lively food scene of Barcelona."
+                                }
+                            ]
+                        },
+                        {
+                            "title": "Asia",
+                            "rows": [
+                                {
+                                    "id": "tokyo",
+                                    "title": "Tokyo, Japan",
+                                    "description": "Discover the perfect blend of modern and traditional in the bustling Japanese capital."
+                                },
+                                {
+                                    "id": "bali",
+                                    "title": "Bali, Indonesia",
+                                    "description": "Relax on the beautiful beaches, explore the lush jungles, and experience the unique Balinese culture."
+                                },
+                                {
+                                    "id": "bangkok",
+                                    "title": "Bangkok, Thailand",
+                                    "description": "Immerse yourself in the vibrant street life, delectable cuisine, and rich history of the City of Angels."
+                                }
+                            ]
+                        }
+                    ]
                 }
             }
+
         })
 
     };
