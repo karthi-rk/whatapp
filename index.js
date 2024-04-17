@@ -2,6 +2,31 @@ const express = require('express');
 const app = express();
 const port = 8000;
 app.use(express.json())
+
+// ajith code start
+var admin = require("firebase-admin")
+const path = require('path');
+const serviceAccount = require(path.resolve(__dirname, 'pet-care-services-484c0-firebase-adminsdk-tk80p-1e15de02ca.json'));
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+
+})
+app.post('/writeDataToFirestore', async (req, res) => {
+    try {
+
+        const firestore = admin.firestore();
+        const docRef = await firestore.collection("payment_collection").add({
+            field1: "value1",
+            field2: "value2",
+        });
+        res.send('Document written successfully');
+    } catch (error) {
+        console.error('Error writing document:', error);
+        res.status(500).send('Error writing document');
+    }
+});
+//ajith code ends
 app.get('/', (req, res) => {
     res.send('Hello World from Express!');
 });
