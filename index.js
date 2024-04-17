@@ -19,7 +19,8 @@ app.post('/receive-message', (req, res) => {
     console.log(JSON.stringify(req.body.entry[0].changes))
     console.log(req.body.messages)
     console.log(req.body.field)
-    sendWhatsappMessage();
+    if (req.body.entry[0].changes[0].value.messages)
+        sendWhatsappMessage();
     res.send(req.query['hub.challenge']);
 });
 function sendWhatsappMessage() {
