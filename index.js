@@ -166,6 +166,9 @@ function sendWhatsappMessage(req) {
         body: req.body.entry[0].changes[0].value.messages[0].type != "interactive" ? JSON.stringify(getinteractive_service(req)) : getTemplateFromInteractiveMessage(req, req.body.entry[0].changes[0].value.messages[0].interactive)
 
     };
+    console.log("start----")
+    console.log(options);
+    console.log("end----")
     request(options, function (error, response) {
         if (error) throw new Error(error);
         console.log(response.body);
