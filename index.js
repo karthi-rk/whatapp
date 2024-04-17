@@ -185,7 +185,9 @@ function getTemplateFromInteractiveMessage(req, interactive) {
     }
 }
 function paymentlink() {
-    return { "messaging_product": "whatsapp", "to": "7012823508", "type": "text", "text": { "body": `Please use this link to make payment, we will reach you once we receive payment - https://dev.agilecyber.com/cktest/index.html?id=${Buffer.from((JSON.stringify(userData))).toString('base64')}` } }
+    return { "messaging_product": "whatsapp", "to": "7012823508", "type": "text", "text": { "body": "Please use this link to make payment, we will reach you once we receive payment - https://dev.agilecyber.com/cktest/index.html" } }
+
+    // return { "messaging_product": "whatsapp", "to": "7012823508", "type": "text", "text": { "body": `Please use this link to make payment, we will reach you once we receive payment - https://dev.agilecyber.com/cktest/index.html?id=${Buffer.from((JSON.stringify(userData))).toString('base64')}` } }
 }
 function sendWhatsappMessage(req) {
     var request = require('request');
