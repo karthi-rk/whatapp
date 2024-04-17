@@ -56,17 +56,17 @@ function sendWhatsappMessage() {
                                 {
                                     "id": "paris",
                                     "title": "Paris, France",
-                                    "description": "Explore the City of Love with its iconic landmarks and vibrant culture."
+                                    "description": "Explore the City of Love with its iconic landmarks and vibrant culture"
                                 },
                                 {
                                     "id": "london",
                                     "title": "London, England",
-                                    "description": "Experience the rich history, modern architecture, and diverse neighborhoods of the British capital."
+                                    "description": "Experience the rich history"
                                 },
                                 {
                                     "id": "barcelona",
                                     "title": "Barcelona, Spain",
-                                    "description": "Immerse yourself in the Mediterranean vibe, renowned architecture, and lively food scene of Barcelona."
+                                    "description": "Immerse yourself in the Mediterranean vibe"
                                 }
                             ]
                         },
@@ -76,17 +76,17 @@ function sendWhatsappMessage() {
                                 {
                                     "id": "tokyo",
                                     "title": "Tokyo, Japan",
-                                    "description": "Discover the perfect blend of modern and traditional in the bustling Japanese capital."
+                                    "description": "Discover the perfect blend of modern"
                                 },
                                 {
                                     "id": "bali",
                                     "title": "Bali, Indonesia",
-                                    "description": "Relax on the beautiful beaches, explore the lush jungles, and experience the unique Balinese culture."
+                                    "description": "Relax on the beautiful beaches"
                                 },
                                 {
                                     "id": "bangkok",
                                     "title": "Bangkok, Thailand",
-                                    "description": "Immerse yourself in the vibrant street life, delectable cuisine, and rich history of the City of Angels."
+                                    "description": "Immerse yourself in the vibrant street life"
                                 }
                             ]
                         }
