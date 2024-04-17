@@ -7,7 +7,7 @@ app.get('/', (req, res) => {
 });
 pet = { "918220179756": ["Max", "Julie"], "other": ["Doggy", "Puppy"] };
 
-function getinteractive_service() {
+function getinteractive_service(req) {
     return {
         "messaging_product": "whatsapp",
         "to": req.body.entry[0].changes[0].value.messages[0].from,
@@ -147,7 +147,7 @@ app.post('/receive-message', (req, res) => {
         sendWhatsappMessage(req);
     res.send(req.query['hub.challenge']);
 });
-function getTemplateFromInteractiveMessage(interactive) {
+function getTemplateFromInteractiveMessage(req, interactive) {
     if (interactive.list_reply.id.includes("service")) {
         return getpetInteractiveJson(req);
     } else if (interactive.list_reply.id.includes("slot")) {
@@ -163,7 +163,7 @@ function sendWhatsappMessage(req) {
             'Authorization': 'Bearer EAAPsguiCMzMBOyVbZCFGr1TO9fEbVzp1AWvLyKQAofmBjMp9g702UOtcuUZAWZBZCv683IR9T9FneBLg5vZAkZAYpq97xhvxQA9Jw68uSy9b24yVRlPqzrHryMLbasnBfZAbgGbp2nwhZBAZCZCyHjyoDZBdoryUn2e164zYBddverujO566gs8n4FeuskYWSZCZAcMHobOyXHj9bYcckcX1ww3AZD',
             'Content-Type': 'application/json'
         },
-        body: req.body.entry[0].changes[0].value.messages[0].type != "interactive" ? JSON.stringify(getinteractive_service(req)) : getTemplateFromInteractiveMessage(req.body.entry[0].changes[0].value.messages[0].interactive)
+        body: req.body.entry[0].changes[0].value.messages[0].type != "interactive" ? JSON.stringify(getinteractive_service(req)) : getTemplateFromInteractiveMessage(req, req.body.entry[0].changes[0].value.messages[0].interactive)
 
     };
     request(options, function (error, response) {
