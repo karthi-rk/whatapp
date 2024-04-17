@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const port = 8000;
 const cors = require('cors');
+var request = require('request');
+
 app.use(express.json())
 app.use(cors());
 // ajith code start
@@ -257,7 +259,6 @@ function paymentlink(req) {
     // return { "messaging_product": "whatsapp", "to": "7012823508", "type": "text", "text": { "body": `Please use this link to make payment, we will reach you once we receive payment - https://dev.agilecyber.com/cktest/index.html?id=${Buffer.from((JSON.stringify(userData))).toString('base64')}` } }
 }
 function sendWhatsappMessage(req) {
-    var request = require('request');
 
     if (req.body.entry[0].changes[0].value.messages[0].type != "interactive" && req.body.entry[0].changes[0].value.messages[0].text.body.toLowerCase().includes("hi")) {
         var options = {
