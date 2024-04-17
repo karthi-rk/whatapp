@@ -15,7 +15,7 @@ admin.initializeApp({
 })
 app.post('/writeDataToFirestore', async (req, res) => {
     console.log("inside the function");
-    console.log(res.body)
+    console.log(req.body)
     try {
 
         const firestore = admin.firestore();
@@ -25,7 +25,7 @@ app.post('/writeDataToFirestore', async (req, res) => {
         });
         res.send('Document written successfully');
     } catch (error) {
-        console.error('Error writing document:', error);
+        console.log('Error writing document:', error);
         res.status(500).send('Error writing document');
     }
 });
