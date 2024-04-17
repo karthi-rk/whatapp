@@ -46,7 +46,7 @@ function getinteractive_service(req) {
         }
     }
 };
-function getpetInteractiveJson(req, data) {
+function getpetInteractiveJson(req) {
     return {
         "messaging_product": "whatsapp",
         "to": req.body.entry[0].changes[0].value.messages[0].from,
@@ -148,6 +148,7 @@ app.post('/receive-message', (req, res) => {
 });
 function getTemplateFromInteractiveMessage(req, interactive) {
     if (interactive.list_reply.id.includes("service")) {
+        userData[req.body.entry[0].changes[0].value.messages[0].from] = {}
         userData[req.body.entry[0].changes[0].value.messages[0].from]['service'] = interactive.list_reply
         return getpetInteractiveJson(req);
     } else if (interactive.list_reply.id.includes("pet")) {
