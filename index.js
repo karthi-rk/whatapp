@@ -180,8 +180,10 @@ app.post('/receive-message', (req, res) => {
     res.send(req.query['hub.challenge']);
 });
 function getTemplateFromInteractiveMessage(req, interactive) {
-    console.log("datecheck", req.body.entry[0].changes[0].value.messages[0].text.body.trim());
-    console.log(detectDateFormat(req.body.entry[0].changes[0].value.messages[0].text.body.trim()))
+    if (req.body.entry[0].changes[0].value.messages[0].type != "interactive") {
+        console.log("datecheck", req.body.entry[0].changes[0].value.messages[0].text.body.trim());
+        console.log(detectDateFormat(req.body.entry[0].changes[0].value.messages[0].text.body.trim()))
+    }
     if (interactive.list_reply.id.includes("service")) {
         userData[req.body.entry[0].changes[0].value.messages[0].from] = {}
         userData[req.body.entry[0].changes[0].value.messages[0].from]['service'] = interactive.list_reply
