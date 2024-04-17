@@ -190,11 +190,29 @@ function getTemplateFromInteractiveMessage(req, interactive) {
     } else if (interactive.list_reply.id.includes("slot")) {
         userData[req.body.entry[0].changes[0].value.messages[0].from]['slot'] = interactive.list_reply
         return getdate(req);
-    } else if (interactive.list_reply.id.includes("date")) {
-        userData[req.body.entry[0].changes[0].value.messages[0].from]['date'] = interactive.list_reply
+    } else if (detectDateFormat(req.body.entry[0].changes[0].value.messages[0].text.body.trim())) {
+        userData[req.body.entry[0].changes[0].value.messages[0].from]['date'] = req.body.entry[0].changes[0].value.messages[0].text.body
         return paymentlink(req);
     }
 }
+
+// Regular expression patterns to detect date formats
+const datePatterns = [
+    /\b\d{4}-\d{2}-\d{2}\b/,
+    /\b\d{2}-\d{2}-\d{4}\b/,
+    /\b\d{2}\/\d{2}\/\d{4}\b/
+];
+
+// Function to detect date format from the message text
+function detectDateFormat(message) {
+    for (const pattern of datePatterns) {
+        if (pattern.test(message)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 function getdate(req) {
     return {
         "messaging_product": "whatsapp",
