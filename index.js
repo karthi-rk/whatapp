@@ -13,6 +13,8 @@ admin.initializeApp({
 
 })
 app.post('/writeDataToFirestore', async (req, res) => {
+    console.log("inside the function");
+    console.log(res.body)
     try {
 
         const firestore = admin.firestore();
