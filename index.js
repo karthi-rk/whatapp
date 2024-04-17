@@ -4,28 +4,28 @@ const port = 8000;
 app.use(express.json())
 
 // ajith code start
-// var admin = require("firebase-admin")
-// const path = require('path');
-// const serviceAccount = require(path.resolve(__dirname, 'pet-care-services-484c0-firebase-adminsdk-tk80p-1e15de02ca.json'));
+var admin = require("firebase-admin")
+const path = require('path');
+const serviceAccount = require(path.resolve(__dirname, 'pet-care-services-484c0-firebase-adminsdk-tk80p-1e15de02ca.json'));
 
-// admin.initializeApp({
-//     credential: admin.credential.cert(serviceAccount)
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
 
-// })
-// app.post('/writeDataToFirestore', async (req, res) => {
-//     try {
+})
+app.post('/writeDataToFirestore', async (req, res) => {
+    try {
 
-//         const firestore = admin.firestore();
-//         const docRef = await firestore.collection("payment_collection").add({
-//             field1: "value1",
-//             field2: "value2",
-//         });
-//         res.send('Document written successfully');
-//     } catch (error) {
-//         console.error('Error writing document:', error);
-//         res.status(500).send('Error writing document');
-//     }
-// });
+        const firestore = admin.firestore();
+        const docRef = await firestore.collection("payment_collection").add({
+            field1: "value1",
+            field2: "value2",
+        });
+        res.send('Document written successfully');
+    } catch (error) {
+        console.error('Error writing document:', error);
+        res.status(500).send('Error writing document');
+    }
+});
 //ajith code ends
 app.get('/', (req, res) => {
     res.send('Hello World from Express!');
@@ -111,6 +111,14 @@ function getpetInteractiveJson(req) {
 
     }
 };
+function intro(req) {
+    return {
+        "messaging_product": "whatsapp",
+        "to": req.body.entry[0].changes[0].value.messages[0].from,
+        "type": "text",
+        "text": "Hi,\n\nWelcome to Pet Care! 🌟 We're thrilled to assist you in booking our services. Whether you're looking to schedule a booking, we're here to make the process seamless for you.\n\nPlease select your options below.  Once you've made your selection, simply tap the \"Select\" button next to your desired time.\n\nIf you have any questions or need further assistance, feel free to reach out to us via email support@agilecyber.com. We're here to help!"
+    }
+}
 function getslotInteractiveJson(req) {
     return {
         "messaging_product": "whatsapp",
@@ -184,13 +192,32 @@ function getTemplateFromInteractiveMessage(req, interactive) {
         return paymentlink(req);
     }
 }
-function paymentlink() {
-    return { "messaging_product": "whatsapp", "to": "7012823508", "type": "text", "text": { "body": "Please use this link to make payment, we will reach you once we receive payment - https://dev.agilecyber.com/cktest/index.html" } }
+function paymentlink(req) {
+    return { "messaging_product": "whatsapp", "to": req.body.entry[0].changes[0].value.messages[0].from, "type": "text", "text": { "body": "Please use this link to make payment, we will reach you once we receive payment - https://dev.agilecyber.com/cktest/index.html" } }
 
     // return { "messaging_product": "whatsapp", "to": "7012823508", "type": "text", "text": { "body": `Please use this link to make payment, we will reach you once we receive payment - https://dev.agilecyber.com/cktest/index.html?id=${Buffer.from((JSON.stringify(userData))).toString('base64')}` } }
 }
 function sendWhatsappMessage(req) {
     var request = require('request');
+
+    if (req.body.entry[0].changes[0].value.messages[0].type != "interactive" && req.body.entry[0].changes[0].value.messages[0].text.body.toLowerCase().includes("hi")) {
+        var options = {
+            'method': 'POST',
+            'url': 'https://graph.facebook.com/v18.0/291249394069250/messages',
+            'headers': {
+                'Authorization': 'Bearer EAAPsguiCMzMBOyVbZCFGr1TO9fEbVzp1AWvLyKQAofmBjMp9g702UOtcuUZAWZBZCv683IR9T9FneBLg5vZAkZAYpq97xhvxQA9Jw68uSy9b24yVRlPqzrHryMLbasnBfZAbgGbp2nwhZBAZCZCyHjyoDZBdoryUn2e164zYBddverujO566gs8n4FeuskYWSZCZAcMHobOyXHj9bYcckcX1ww3AZD',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(intro(req))
+        };
+        console.log("start----")
+        console.log(options);
+        console.log("end----")
+        request(options, function (error, response) {
+            if (error) throw new Error(error);
+            console.log(response.body);
+        });
+    }
     var options = {
         'method': 'POST',
         'url': 'https://graph.facebook.com/v18.0/291249394069250/messages',
