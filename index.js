@@ -17,12 +17,13 @@ app.post('/writeDataToFirestore', async (req, res) => {
     console.log("inside the function");
     console.log(req.body)
     try {
-
+        sendSuccessMail(Object.keys(dd.petData)[0])
         const firestore = admin.firestore();
         const docRef = await firestore.collection("payment_collection").add({
             field1: "value1",
             field2: "value2",
         });
+
         res.send('Document written successfully');
     } catch (error) {
         console.log('Error writing document:', error);
@@ -114,6 +115,26 @@ function getpetInteractiveJson(req) {
 
     }
 };
+function sendSuccessMail(to) {
+    var options = {
+        'method': 'POST',
+        'url': 'https://graph.facebook.com/v18.0/291249394069250/messages',
+        'headers': {
+            'Authorization': 'Bearer EAAPsguiCMzMBOyVbZCFGr1TO9fEbVzp1AWvLyKQAofmBjMp9g702UOtcuUZAWZBZCv683IR9T9FneBLg5vZAkZAYpq97xhvxQA9Jw68uSy9b24yVRlPqzrHryMLbasnBfZAbgGbp2nwhZBAZCZCyHjyoDZBdoryUn2e164zYBddverujO566gs8n4FeuskYWSZCZAcMHobOyXHj9bYcckcX1ww3AZD',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "messaging_product": "whatsapp",
+            "to": to,
+            "type": "text",
+            "text": { "body": "Thank you for providing the data! Your booking is now confirmed, and we have received your payment. We look forward to serving you. If you have any further questions or need assistance, feel free to reach out to us. Have a wonderful day!" }
+        })
+    };
+    request(options, function (error, response) {
+        if (error) throw new Error(error);
+        console.log(response.body);
+    });
+}
 function intro(req) {
     return {
         "messaging_product": "whatsapp",
