@@ -12,6 +12,7 @@
   "author": "ajith,ck,ayyappen",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.19.2",
     "firebase-admin": "^12.1.0",
     "request": "^2.88.2"

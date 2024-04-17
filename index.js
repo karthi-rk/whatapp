@@ -1,8 +1,9 @@
 const express = require('express');
 const app = express();
 const port = 8000;
+const cors = require('cors');
 app.use(express.json())
-
+app.use(cors());
 // ajith code start
 var admin = require("firebase-admin")
 const path = require('path');
