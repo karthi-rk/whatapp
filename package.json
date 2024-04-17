@@ -1,0 +1,17 @@
+{
+  "name": "whatapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "whatapp"
+  ],
+  "author": "ajith,ck,ayyappen",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
