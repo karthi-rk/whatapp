@@ -116,7 +116,7 @@ function intro(req) {
         "messaging_product": "whatsapp",
         "to": req.body.entry[0].changes[0].value.messages[0].from,
         "type": "text",
-        "text": { "body": "Hi,\n\nWelcome to Pet Care! 🌟 We're thrilled to assist you in booking our services. Whether you're looking to schedule a booking, we're here to make the process seamless for you.\n\nPlease select your options below.  Once you've made your selection, simply tap the \"Select\" button next to your desired time.\n\nIf you have any questions or need further assistance, feel free to reach out to us via email support@agilecyber.com. We're here to help!" }
+        "text": { "body": "Hi,\n\nWelcome to Pet Care! 🌟 We're thrilled to assist you in booking our services. Whether you're looking to schedule a booking, we're here to make the process seamless for you.\n\nPlease select your options below.  Once you've made your selection, simply tap the \"Choose\" button next to your desired time.\n\nIf you have any questions or need further assistance, feel free to reach out to us via email support@agilecyber.com. We're here to help!" }
     }
 }
 function getslotInteractiveJson(req) {
@@ -189,7 +189,19 @@ function getTemplateFromInteractiveMessage(req, interactive) {
         return getslotInteractiveJson(req);
     } else if (interactive.list_reply.id.includes("slot")) {
         userData[req.body.entry[0].changes[0].value.messages[0].from]['slot'] = interactive.list_reply
+        return getdate(req);
+    } else if (interactive.list_reply.id.includes("date")) {
+        userData[req.body.entry[0].changes[0].value.messages[0].from]['date'] = interactive.list_reply
         return paymentlink(req);
+    }
+}
+function getdate(req) {
+    return {
+        "messaging_product": "whatsapp",
+        expectedReply: "date",
+        "to": req.body.entry[0].changes[0].value.messages[0].from,
+        "type": "text",
+        "text": { "body": "Great! Now, please provide the date you would like to schedule the service in the following format: DD-MM-YYYY (e.g., 19-04-2024)." }
     }
 }
 function paymentlink(req) {
