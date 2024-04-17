@@ -15,6 +15,42 @@ app.get('/receive-message', (req, res) => {
         res.sendStatus(400)
     }
 });
+app.post('/receive-message', (req, res) => {
+    if (req.query['hub.verify_token'] === "huiiui") {
+        sendWhatsappMessage();
+        res.send(req.query['hub.challenge']);
+    } else {
+        res.sendStatus(400)
+    }
+});
+function sendWhatsappMessage() {
+    var request = require('request');
+    var options = {
+        'method': 'POST',
+        'url': 'https://graph.facebook.com/v18.0/291249394069250/messages',
+        'headers': {
+            'Authorization': 'Bearer EAAPsguiCMzMBOyVbZCFGr1TO9fEbVzp1AWvLyKQAofmBjMp9g702UOtcuUZAWZBZCv683IR9T9FneBLg5vZAkZAYpq97xhvxQA9Jw68uSy9b24yVRlPqzrHryMLbasnBfZAbgGbp2nwhZBAZCZCyHjyoDZBdoryUn2e164zYBddverujO566gs8n4FeuskYWSZCZAcMHobOyXHj9bYcckcX1ww3AZD',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "messaging_product": "whatsapp",
+            "to": "7012823508",
+            "type": "template",
+            "template": {
+                "name": "hello_world",
+                "language": {
+                    "code": "en_US"
+                }
+            }
+        })
+
+    };
+    request(options, function (error, response) {
+        if (error) throw new Error(error);
+        console.log(response.body);
+    });
+
+}
 app.get('*', function (req, res) {
     console.log("route not found")
     res.status(404).send('what???');
