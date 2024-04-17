@@ -16,7 +16,7 @@ app.get('/receive-message', (req, res) => {
     }
 });
 app.post('/receive-message', (req, res) => {
-    console.log(req.body)
+    console.log(JSON.stringify(req.body.entry[0].changes))
     console.log(req.body.messages)
     console.log(req.body.field)
     sendWhatsappMessage();
