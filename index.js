@@ -31,12 +31,12 @@ function getinteractive_service(req) {
                             {
                                 "id": "service-1",
                                 "title": "Dog Walking",
-                                "description": "Explore the City"
+                                "description": "Price - 100 GBP"
                             },
                             {
                                 "id": "service-2",
                                 "title": "Day Care",
-                                "description": "Experience the rich history"
+                                "description": "Price - 100 GBP"
                             },
                         ]
                     },
@@ -87,7 +87,7 @@ function getpetInteractiveJson(req) {
 
     }
 };
-function getslotInteractiveJson() {
+function getslotInteractiveJson(req) {
     return {
         "messaging_product": "whatsapp",
         "to": req.body.entry[0].changes[0].value.messages[0].from,
@@ -150,9 +150,14 @@ app.post('/receive-message', (req, res) => {
 function getTemplateFromInteractiveMessage(req, interactive) {
     if (interactive.list_reply.id.includes("service")) {
         return getpetInteractiveJson(req);
-    } else if (interactive.list_reply.id.includes("slot")) {
+    } else if (interactive.list_reply.id.includes("pet")) {
         return getslotInteractiveJson(req);
+    } else if (interactive.list_reply.id.includes("slot")) {
+        return paymentlink(req);
     }
+}
+function paymentlink() {
+    return { "messaging_product": "whatsapp", "to": "7012823508", "type": "text", "text": "Please use this link to make payment, we will reach you once we receive payment - https://dev.agilecyber.com/cktest/index.html" }
 }
 function sendWhatsappMessage(req) {
     var request = require('request');
