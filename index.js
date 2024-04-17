@@ -116,7 +116,7 @@ function intro(req) {
         "messaging_product": "whatsapp",
         "to": req.body.entry[0].changes[0].value.messages[0].from,
         "type": "text",
-        "text": "Hi,\n\nWelcome to Pet Care! 🌟 We're thrilled to assist you in booking our services. Whether you're looking to schedule a booking, we're here to make the process seamless for you.\n\nPlease select your options below.  Once you've made your selection, simply tap the \"Select\" button next to your desired time.\n\nIf you have any questions or need further assistance, feel free to reach out to us via email support@agilecyber.com. We're here to help!"
+        "text": { "body": "Hi,\n\nWelcome to Pet Care! 🌟 We're thrilled to assist you in booking our services. Whether you're looking to schedule a booking, we're here to make the process seamless for you.\n\nPlease select your options below.  Once you've made your selection, simply tap the \"Select\" button next to your desired time.\n\nIf you have any questions or need further assistance, feel free to reach out to us via email support@agilecyber.com. We're here to help!" }
     }
 }
 function getslotInteractiveJson(req) {
