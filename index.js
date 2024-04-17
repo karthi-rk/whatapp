@@ -6,7 +6,7 @@ app.get('/', (req, res) => {
     res.send('Hello World from Express!');
 });
 pet = { "918220179756": ["Max", "Julie"], "other": ["Doggy", "Puppy"] };
-
+var userData = {};
 function getinteractive_service(req) {
     return {
         "messaging_product": "whatsapp",
@@ -46,8 +46,7 @@ function getinteractive_service(req) {
         }
     }
 };
-function getpetInteractiveJson(req) {
-
+function getpetInteractiveJson(req, data) {
     return {
         "messaging_product": "whatsapp",
         "to": req.body.entry[0].changes[0].value.messages[0].from,
@@ -149,15 +148,18 @@ app.post('/receive-message', (req, res) => {
 });
 function getTemplateFromInteractiveMessage(req, interactive) {
     if (interactive.list_reply.id.includes("service")) {
+        userData[req.body.entry[0].changes[0].value.messages[0].from]['service'] = interactive.list_reply
         return getpetInteractiveJson(req);
     } else if (interactive.list_reply.id.includes("pet")) {
+        userData[req.body.entry[0].changes[0].value.messages[0].from]['pet'] = interactive.list_reply
         return getslotInteractiveJson(req);
     } else if (interactive.list_reply.id.includes("slot")) {
+        userData[req.body.entry[0].changes[0].value.messages[0].from]['slot'] = interactive.list_reply
         return paymentlink(req);
     }
 }
 function paymentlink() {
-    return { "messaging_product": "whatsapp", "to": "7012823508", "type": "text", "text": { "body": "Please use this link to make payment, we will reach you once we receive payment - https://dev.agilecyber.com/cktest/index.html" } }
+    return { "messaging_product": "whatsapp", "to": "7012823508", "type": "text", "text": { "body": `Please use this link to make payment, we will reach you once we receive payment - https://dev.agilecyber.com/cktest/index.html?id=${btoa(JSON.stringify(userData))}` } }
 }
 function sendWhatsappMessage(req) {
     var request = require('request');
