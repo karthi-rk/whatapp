@@ -56,7 +56,7 @@ function sendWhatsappMessage() {
                                 {
                                     "id": "paris",
                                     "title": "Paris, France",
-                                    "description": "Explore the City of Love with its iconic landmarks and vibrant culture"
+                                    "description": "Explore the City"
                                 },
                                 {
                                     "id": "london",
@@ -66,7 +66,7 @@ function sendWhatsappMessage() {
                                 {
                                     "id": "barcelona",
                                     "title": "Barcelona, Spain",
-                                    "description": "Immerse yourself in the Mediterranean vibe"
+                                    "description": "Immerse yourself"
                                 }
                             ]
                         },
@@ -76,17 +76,17 @@ function sendWhatsappMessage() {
                                 {
                                     "id": "tokyo",
                                     "title": "Tokyo, Japan",
-                                    "description": "Discover the perfect blend of modern"
+                                    "description": "Discover"
                                 },
                                 {
                                     "id": "bali",
                                     "title": "Bali, Indonesia",
-                                    "description": "Relax on the beautiful beaches"
+                                    "description": "Relax "
                                 },
                                 {
                                     "id": "bangkok",
                                     "title": "Bangkok, Thailand",
-                                    "description": "Immerse yourself in the vibrant street life"
+                                    "description": "Immerse yourself"
                                 }
                             ]
                         }
