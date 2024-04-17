@@ -276,6 +276,7 @@ function sendWhatsappMessage(req) {
 }
 app.use((req, res, next) => {
     console.log(req.path)
+    console.log(req.method)
     console.log("route not found")
 
 });
