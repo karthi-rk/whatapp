@@ -122,7 +122,7 @@ function sendSuccessMail(to) {
         'method': 'POST',
         'url': 'https://graph.facebook.com/v18.0/291249394069250/messages',
         'headers': {
-            'Authorization': 'Bearer EAAPsguiCMzMBO2UV80ReDcn5oVMSX5jSpp3K5N8mD0kFCJx1geJt1Ker4teuErSEHTf8h5S0EYpyXmk5TplaaVonmQkIuZBZBZBeqOWIn3cZCuiDucF2s8kBVPEwsTdS1d4lVE01Ok0FsaZC9SCPP1ov6a7ZA166u8AZCZBCivTIEBOs1m02M0cMXn6z5MzrmVK9',
+            'Authorization': 'Bearer EAAPsguiCMzMBOyVbZCFGr1TO9fEbVzp1AWvLyKQAofmBjMp9g702UOtcuUZAWZBZCv683IR9T9FneBLg5vZAkZAYpq97xhvxQA9Jw68uSy9b24yVRlPqzrHryMLbasnBfZAbgGbp2nwhZBAZCZCyHjyoDZBdoryUn2e164zYBddverujO566gs8n4FeuskYWSZCZAcMHobOyXHj9bYcckcX1ww3AZD',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
@@ -269,7 +269,7 @@ function sendWhatsappMessage(req) {
             'method': 'POST',
             'url': 'https://graph.facebook.com/v18.0/291249394069250/messages',
             'headers': {
-                'Authorization': 'Bearer EAAPsguiCMzMBO2UV80ReDcn5oVMSX5jSpp3K5N8mD0kFCJx1geJt1Ker4teuErSEHTf8h5S0EYpyXmk5TplaaVonmQkIuZBZBZBeqOWIn3cZCuiDucF2s8kBVPEwsTdS1d4lVE01Ok0FsaZC9SCPP1ov6a7ZA166u8AZCZBCivTIEBOs1m02M0cMXn6z5MzrmVK9',
+                'Authorization': 'Bearer EAAPsguiCMzMBOyVbZCFGr1TO9fEbVzp1AWvLyKQAofmBjMp9g702UOtcuUZAWZBZCv683IR9T9FneBLg5vZAkZAYpq97xhvxQA9Jw68uSy9b24yVRlPqzrHryMLbasnBfZAbgGbp2nwhZBAZCZCyHjyoDZBdoryUn2e164zYBddverujO566gs8n4FeuskYWSZCZAcMHobOyXHj9bYcckcX1ww3AZD',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(intro(req))
@@ -286,7 +286,7 @@ function sendWhatsappMessage(req) {
         'method': 'POST',
         'url': 'https://graph.facebook.com/v18.0/291249394069250/messages',
         'headers': {
-            'Authorization': 'Bearer EAAPsguiCMzMBO2UV80ReDcn5oVMSX5jSpp3K5N8mD0kFCJx1geJt1Ker4teuErSEHTf8h5S0EYpyXmk5TplaaVonmQkIuZBZBZBeqOWIn3cZCuiDucF2s8kBVPEwsTdS1d4lVE01Ok0FsaZC9SCPP1ov6a7ZA166u8AZCZBCivTIEBOs1m02M0cMXn6z5MzrmVK9',
+            'Authorization': 'Bearer EAAPsguiCMzMBOyVbZCFGr1TO9fEbVzp1AWvLyKQAofmBjMp9g702UOtcuUZAWZBZCv683IR9T9FneBLg5vZAkZAYpq97xhvxQA9Jw68uSy9b24yVRlPqzrHryMLbasnBfZAbgGbp2nwhZBAZCZCyHjyoDZBdoryUn2e164zYBddverujO566gs8n4FeuskYWSZCZAcMHobOyXHj9bYcckcX1ww3AZD',
             'Content-Type': 'application/json'
         },
         body: req.body.entry[0].changes[0].value.messages[0].type != "interactive" && !detectDateFormat(req.body.entry[0].changes[0].value.messages[0].text.body.trim()) ? JSON.stringify(getinteractive_service(req)) : req.body.entry[0].changes[0].value.messages[0].type != "interactive" ? JSON.stringify(paymentText(req)) : JSON.stringify(getTemplateFromInteractiveMessage(req, req.body.entry[0].changes[0].value.messages[0].interactive))
