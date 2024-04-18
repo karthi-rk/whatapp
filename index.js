@@ -19,7 +19,7 @@ app.post('/writeDataToFirestore', async (req, res) => {
     console.log("inside the function");
     console.log(req.body)
     try {
-        sendSuccessMail(Object.keys(req.body.petData)[0])
+        sendSuccessMail(req.body.petData.user)
         const firestore = admin.firestore();
         const docRef = await firestore.collection("payment_collection").add({
             field1: "value1",
@@ -257,6 +257,7 @@ function getdate(req) {
     }
 }
 function paymentlink(req) {
+    userData[req.body.entry[0].changes[0].value.messages[0].from]['user']=req.body.entry[0].changes[0].value.messages[0].from;
     return { "messaging_product": "whatsapp", "to": req.body.entry[0].changes[0].value.messages[0].from, "type": "text", "text": { "body": `Please use this link to make payment, we will reach you once we receive payment - https://dev.agilecyber.com/cktest/index.html?id=${Buffer.from((JSON.stringify(userData[req.body.entry[0].changes[0].value.messages[0].from]))).toString('base64')}` } }
 
     // return { "messaging_product": "whatsapp", "to": "7012823508", "type": "text", "text": { "body": `Please use this link to make payment, we will reach you once we receive payment - https://dev.agilecyber.com/cktest/index.html?id=${Buffer.from((JSON.stringify(userData))).toString('base64')}` } }
