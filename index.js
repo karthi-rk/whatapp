@@ -133,8 +133,8 @@ function sendSuccessMail(to) {
         })
     };
     console.log("start----")
-        console.log(options);
-        console.log("end----")
+    console.log(options);
+    console.log("end----")
     request(options, function (error, response) {
         if (error) throw new Error(error);
         console.log(response.body);
@@ -257,14 +257,14 @@ function getdate(req) {
     }
 }
 function paymentlink(req) {
-    userData[req.body.entry[0].changes[0].value.messages[0].from]['user']=req.body.entry[0].changes[0].value.messages[0].from;
+    userData[req.body.entry[0].changes[0].value.messages[0].from]['user'] = req.body.entry[0].changes[0].value.messages[0].from;
     return { "messaging_product": "whatsapp", "to": req.body.entry[0].changes[0].value.messages[0].from, "type": "text", "text": { "body": `Please use this link to make payment, we will reach you once we receive payment - https://dev.agilecyber.com/cktest/index.html?id=${Buffer.from((JSON.stringify(userData[req.body.entry[0].changes[0].value.messages[0].from]))).toString('base64')}` } }
 
     // return { "messaging_product": "whatsapp", "to": "7012823508", "type": "text", "text": { "body": `Please use this link to make payment, we will reach you once we receive payment - https://dev.agilecyber.com/cktest/index.html?id=${Buffer.from((JSON.stringify(userData))).toString('base64')}` } }
 }
 function sendWhatsappMessage(req) {
 
-    if (req.body.entry[0].changes[0].value.messages[0].type != "interactive" && req.body.entry[0].changes[0].value.messages[0].text.body.toLowerCase().includes("hi")) {
+    if (req.body.entry[0].changes[0].value.messages[0].type != "interactive" && req.body.entry[0].changes[0].value.messages[0].text.body.toLowerCase().includes("hi") || req.body.entry[0].changes[0].value.messages[0].text.body.toLowerCase().includes("hai")) {
         var options = {
             'method': 'POST',
             'url': 'https://graph.facebook.com/v18.0/292559467269557/messages',
