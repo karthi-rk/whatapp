@@ -264,7 +264,7 @@ function paymentlink(req) {
 }
 function sendWhatsappMessage(req) {
 
-    if (req.body.entry[0].changes[0].value.messages[0].type != "interactive" && req.body.entry[0].changes[0].value.messages[0].text.body.toLowerCase().includes("hi") || req.body.entry[0].changes[0].value.messages[0].text.body.toLowerCase().includes("hai")) {
+    if (req.body.entry[0].changes[0].value.messages[0].type != "interactive" && (req.body.entry[0].changes[0].value.messages[0].text.body.toLowerCase().includes("hi") || req.body.entry[0].changes[0].value.messages[0].text.body.toLowerCase().includes("hai"))) {
         var options = {
             'method': 'POST',
             'url': 'https://graph.facebook.com/v18.0/292559467269557/messages',
