@@ -21,10 +21,7 @@ app.post('/writeDataToFirestore', async (req, res) => {
     try {
         sendSuccessMail(req.body.petData.user)
         const firestore = admin.firestore();
-        const docRef = await firestore.collection("payment_collection").add({
-            field1: "value1",
-            field2: "value2",
-        });
+        const docRef = await firestore.collection("payment_collection").add(req.body.petData);
 
         res.send('Document written successfully');
     } catch (error) {
