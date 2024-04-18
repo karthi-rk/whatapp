@@ -132,6 +132,9 @@ function sendSuccessMail(to) {
             "text": { "body": "Thank you for providing the data! Your booking is now confirmed, and we have received your payment. We look forward to serving you. If you have any further questions or need assistance, feel free to reach out to us. Have a wonderful day!" }
         })
     };
+    console.log("start----")
+        console.log(options);
+        console.log("end----")
     request(options, function (error, response) {
         if (error) throw new Error(error);
         console.log(response.body);
